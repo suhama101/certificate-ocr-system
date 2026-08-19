@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificate OCR System</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Teerop AI & ML Internship • Task 1</p>
+        <h1>Certificate OCR System</h1>
+        <p class="subtitle">Upload a certificate image or PDF and automatically extract important information with Tesseract OCR.</p>
+      </div>
+      <div class="status-pill"><span></span> API Online</div>
+    </header>
+
+    <section class="grid">
+      <article class="card upload-card">
+        <h2>1. Upload document</h2>
+        <p>Supported: JPG, JPEG, PNG, TIFF, PDF • Maximum 15 MB</p>
+        <label id="dropZone" class="drop-zone" for="fileInput">
+          <input id="fileInput" type="file" accept=".jpg,.jpeg,.png,.tif,.tiff,.pdf" hidden>
+          <div class="upload-icon">⇧</div>
+          <strong>Drop your certificate here</strong>
+          <span>or click to browse</span>
+        </label>
+        <div id="fileMeta" class="file-meta hidden"></div>
+        <button id="extractBtn" class="primary" disabled>Extract certificate data</button>
+        <div id="progress" class="progress hidden"><div></div></div>
+        <p id="message" class="message"></p>
+      </article>
+
+      <article class="card preview-card">
+        <h2>2. Preview</h2>
+        <div id="previewEmpty" class="empty-state">Choose an image to preview it here. PDFs are processed page by page.</div>
+        <img id="previewImage" class="preview hidden" alt="Certificate preview">
+        <div id="pdfPreview" class="pdf-preview hidden">PDF selected ✓</div>
+      </article>
+    </section>
+
+    <section id="resultsSection" class="card results hidden">
+      <div class="results-heading">
+        <div>
+          <p class="eyebrow">OCR Result</p>
+          <h2>Structured certificate information</h2>
+        </div>
+        <div class="actions">
+          <button id="copyBtn" class="secondary">Copy fields</button>
+          <a id="jsonBtn" class="secondary link-btn" href="#">JSON</a>
+          <a id="csvBtn" class="secondary link-btn" href="#">CSV</a>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <div><span>Pages</span><strong id="pageCount">—</strong></div>
+        <div><span>OCR confidence</span><strong id="confidence">—</strong></div>
+        <div><span>Document ID</span><strong id="docId">—</strong></div>
+      </div>
+
+      <div id="fieldsGrid" class="fields-grid"></div>
+
+      <details class="raw-text">
+        <summary>View raw OCR text</summary>
+        <pre id="rawText"></pre>
+      </details>
+    </section>
+
+    <footer>Built with FastAPI, OpenCV, Tesseract OCR and SQLite.</footer>
+  </main>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
